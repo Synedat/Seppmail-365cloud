@@ -1,46 +1,70 @@
 # Seppmail-365cloud
 
-> Reference repository for seppmail.cloud Microsoft 365 integration.
+> Operational companion repository for SEPPmail365cloud with installation notes, examples and validation patterns for seppmail.cloud.
 
-**Partner resource by Synedat for the SEPPmail ecosystem.**
+This repository is curated by Synedat Group GmbH for the SEPPmail ecosystem. It is intended as an implementation accelerator for customers, partners and delivery teams.
 
 ## Why this repository exists
 
-Repository wrapper for the SEPPmail365cloud PowerShell module documentation, prerequisites and setup guidance for seppmail.cloud.
+This repository is designed to be immediately useful in workshops, pilots, production preparation and knowledge transfer. It combines upstream material with additional operational context, safer examples and governance-oriented documentation so that teams can move from an interesting script to a reviewable implementation asset.
 
-This repository is structured for public consumption and easy discovery across topics such as SEPPmail, Exchange Online, Microsoft 365, Azure, API automation, PowerShell and operational runbooks.
+## Intended audience
 
-## Included content
+Cloud messaging admins, partners and Microsoft 365 teams.
 
-- Documentation-first repository wrapper and entry point
+## What you will find here
 
-## Quick start
+- `docs/ARCHITECTURE.md` - component view and trust boundaries
+- `docs/RBAC-AND-PERMISSIONS.md` - practical role separation guidance
+- `docs/SECURITY-AND-COMPLIANCE.md` - implementation mapping for ISO 27001, BAIT, DORA, TISAX and NIS2
+- `docs/OPERATIONS.md` - operational lifecycle and evidence ideas
+- `docs/TROUBLESHOOTING.md` - first-line support guidance
+- `docs/SEPPMAIL-REFERENCES.md` - official reference list
+- `docs/images/architecture-overview.svg` - lightweight architecture visual
+- `examples/install-module.ps1`
+- `examples/connect-exchange-online.ps1`
+- `examples/cloud-readiness-checklist.md`
 
-1. Verify that you are using SEPPmail365cloud for cloud scenarios, not the appliance-focused SEPPmail365 module.
-2. Install the required PowerShell version and Exchange Online dependencies.
-3. Generate an environment report before applying connector or rule changes.
+## Architecture at a glance
+
+```mermaid
+flowchart LR
+    A[Sender / Exchange Online] --> B[Connector and transport rules]
+    B --> C[SEPPmail gateway or service]
+    C --> D[Cryptographic policy / routing]
+    D --> E[Recipient domain]
+    B -. telemetry .-> F[Logs / monitoring]
+    C -. admin API .-> G[Operations and automation]
+```
+
+## Practical focus
+
+- usable examples rather than empty scaffolding
+- security-conscious defaults and notes on secrets handling
+- architecture and permissions thinking, not just commands
+- audit-friendly documentation structure
+- consistent Synedat branding and discoverability across repositories
+
+## Security and governance themes
+
+This repository intentionally includes implementation notes that align well with:
+- ISO/IEC 27001 style ISMS and control evidence
+- BAIT expectations for banking IT governance and operations
+- DORA-oriented operational resilience thinking
+- TISAX-oriented supplier and security process maturity
+- NIS2-style cyber hygiene and incident preparedness
 
 ## Official SEPPmail references
 
-- [SEPPmail365cloud installation](https://docs.seppmail.com/en/cloud/c07_cloud_powershell_prerequisites_installation.html)
-- [Cmdlets list](https://docs.seppmail.com/en/cloud/c07_cloud_powershell_cmdlets.html)
-- [Using the module](https://docs.seppmail.com/en/cloud/c07_cloud_powershell_using_the_module.html)
+- [SEPPmail365cloud prerequisites and installation](https://docs.seppmail.com/en/cloud/c07_cloud_powershell_prerequisites_installation.html)
+- [seppmail.cloud REST API](https://docs.seppmail.com/en/cloud/c05_sca_05_rest_api.html)
 
-## Publishing notes
+## Synedat
 
-- keep repository description and topics aligned with `.github/repository-profile.md`
-- add a concise repository subtitle in GitHub
-- use consistent Synedat branding across all public SEPPmail repositories
-- keep customer-specific values out of the public repository
+Synedat Group GmbH works across software engineering, cloud, infrastructure, operations and security-related implementation projects. These repositories are structured to be useful both as public technical starters and as conversation starters for concrete customer delivery.
 
-## About Synedat
+Website: https://www.synedat.com/
 
-Synedat publishes practical, reusable assets around software engineering, IT operations, cloud integration and automation.
+## Upstream and provenance
 
-- Website: https://www.synedat.com/
-- Company profile: https://www.synedat.com/en/
-
-## Partner note
-
-This repository is published by Synedat as a partner-oriented resource for the SEPPmail ecosystem. Product ownership, roadmap and official support remain with SEPPmail.
-
+Where an original SEPPmail community repository was available, its source files were preserved and extended. Original README content, where replaced, was moved to `docs/upstream/ORIGINAL-README.md` for traceability.
